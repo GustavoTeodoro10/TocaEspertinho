@@ -1,0 +1,163 @@
+/* Toca do Espertinho — estilos base
+   Tokens compartilhados com tailwind.config (ver index.html) */
+
+:root {
+  --gold-50:  #FFF7E6;
+  --gold-100: #FFEAC2;
+  --gold-300: #FFD166;
+  --gold-500: #F6A61B;
+  --gold-600: #E08900;
+  --gold-700: #B96D00;
+
+  --navy-500: #1B2A4A;
+  --navy-600: #142038;
+  --navy-700: #0E1626;
+  --navy-900: #0A0F1A;
+
+  --cyan-500: #22C3D6;
+  --cyan-600: #12A5B8;
+
+  --coral-500: #FF7A59;
+  --coral-600: #F0603B;
+
+  --violet-500: #7B5FE0;
+  --violet-600: #6247C4;
+
+  --green-500: #4CAF7D;
+  --green-600: #359566;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  color: var(--navy-700);
+  background: #FFFFFF;
+}
+
+.font-display {
+  font-family: "Fredoka", "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Foco visível e consistente em toda a página */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--cyan-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Scrollbar discreta, combinando com a marca */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--gold-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-300);
+  border-radius: 8px;
+  border: 3px solid var(--gold-50);
+}
+
+/* ---------- Revelação ao rolar (uma única coreografia, sem exagero) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Flutuação suave do mascote no herói ---------- */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+.float-mascot {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+/* ---------- Brilho pulsante do botão flutuante de WhatsApp ---------- */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(76, 175, 125, 0.55); }
+  70% { box-shadow: 0 0 0 14px rgba(76, 175, 125, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(76, 175, 125, 0); }
+}
+.pulse-whatsapp {
+  animation: pulse-ring 2.8s ease-out infinite;
+}
+
+/* ---------- Blobs orgânicos das atividades (evita o "card SaaS" padronizado) ---------- */
+.blob {
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  transition: border-radius 0.6s ease, transform 0.35s ease;
+}
+.blob:hover {
+  border-radius: 58% 42% 37% 63% / 55% 59% 41% 45%;
+  transform: translateY(-6px);
+}
+
+/* ---------- Sublinhado orgânico para destacar palavras-chave sem negrito/itálico ---------- */
+.underline-brush {
+  background-image: linear-gradient(var(--gold-300), var(--gold-300));
+  background-repeat: no-repeat;
+  background-size: 100% 0.5em;
+  background-position: 0 88%;
+  padding: 0 0.05em;
+}
+
+/* ---------- Cabeçalho: some a sombra no topo, aparece ao rolar ---------- */
+#site-header {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+#site-header.is-scrolled {
+  box-shadow: 0 4px 24px rgba(14, 22, 38, 0.08);
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+/* ---------- Menu mobile ---------- */
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#mobile-menu.is-open {
+  max-height: 480px;
+}
+
+/* ---------- Balão de depoimento com "rabinho" de fala ---------- */
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  left: 48px;
+  bottom: -18px;
+  width: 36px;
+  height: 36px;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
